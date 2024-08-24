@@ -20,5 +20,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        //set pagination bootstrap four
+        \Illuminate\Pagination\Paginator::useBootstrapFour();
     }
 }

@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UserController;
+use App\Models\Company;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +21,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.dashboard', ['type_menu' => 'dashboard']);
 });
+Route::get('/dashboard', function () {
+    return view('pages.dashboard', ['type_menu' => 'dashboard']);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('home', function () {
+        return view('pages.dashboard',['type_menu' => 'dashboard']);
+    })->name('home');
+
+    Route::resource('users', UserController::class);
+    Route::resource('companies', CompanyController::class);
+    Route::resource('attendances', AttendanceController::class);
+    Route::resource('permissions', PermissionController::class);
+
+});
+
+
